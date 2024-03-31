@@ -7,8 +7,8 @@ import { Textarea } from "@/components/ui/textarea.jsx";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.jsx";
 import "./App.css";
 
-const KVDB_BUCKET = "N7cmQg1DwZbADh2Hu3NncF";
-const KVDB_KEY = "jobs";
+const KVDB_BUCKET = "BLbtbuWvN1B5uCxdV8Nzk6";
+const KVDB_KEY = "jobs:";
 const KVDB_URL = `https://kvdb.io/${KVDB_BUCKET}/`;
 
 function App() {
@@ -24,14 +24,14 @@ function App() {
 
   async function fetchJobs() {
     const res = await fetch(`${KVDB_URL}`, {
-      headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}:`)}` },
+      headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}`)}` },
     });
     const keys = await res.json();
 
     const jobsData = await Promise.all(
       keys.map(async (key) => {
-        const res = await fetch(`${KVDB_URL}${key}`, {
-          headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}:`)}` },
+        const res = await fetch(`${KVDB_URL}${KVDB_KEY}${key}`, {
+          headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}`)}` },
         });
         return res.json();
       }),
@@ -42,10 +42,10 @@ function App() {
 
   async function handleSubmit() {
     const job = { title, description, url };
-    await fetch(`${KVDB_URL}`, {
+    await fetch(`${KVDB_URL}${KVDB_KEY}`, {
       method: "POST",
       headers: {
-        Authorization: `Basic ${btoa(`${KVDB_KEY}:`)}`,
+        Authorization: `Basic ${btoa(`${KVDB_KEY}`)}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(job),
@@ -58,9 +58,9 @@ function App() {
   }
 
   async function handleDelete(key) {
-    await fetch(`${KVDB_URL}${key}`, {
+    await fetch(`${KVDB_URL}${KVDB_KEY}${key}`, {
       method: "DELETE",
-      headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}:`)}` },
+      headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}`)}` },
     });
     fetchJobs();
   }
