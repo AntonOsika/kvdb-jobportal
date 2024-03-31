@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   async function fetchJobs() {
-    const res = await fetch(`${KVDB_URL}?values=true&format=json`, {
+    const res = await fetch(`${KVDB_URL}?values=true&format=json&prefix=jobs:`, {
       headers: { Authorization: `Basic ${btoa(`${KVDB_KEY}`)}` },
     });
     const data = await res.json();
