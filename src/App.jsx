@@ -32,6 +32,8 @@ function App() {
       .filter((job) => job.key.startsWith("jobs_"))
       .map((job) => job.value);
 
+    console.log("Fetched jobs:", jobsData);
+
     setJobs(jobsData);
   }
 
@@ -104,13 +106,13 @@ function App() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {jobs.map((job) => (
-                <TableRow key={job.key}>
-                  <TableCell>{job.value.title}</TableCell>
-                  <TableCell>{job.value.description}</TableCell>
+              {jobs.map((job, index) => (
+                <TableRow key={index}>
+                  <TableCell>{job.title}</TableCell>
+                  <TableCell>{job.description}</TableCell>
                   <TableCell>
-                    <a href={job.value.url} target="_blank">
-                      {job.value.url}
+                    <a href={job.url} target="_blank">
+                      {job.url}
                     </a>
                   </TableCell>
                   <TableCell>
