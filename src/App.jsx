@@ -7,9 +7,9 @@ import { Textarea } from "@/components/ui/textarea.jsx";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.jsx";
 import "./App.css";
 
-const KVDB_BUCKET = "BLbtbuWvN1B5uCxdV8Nzk6";
-const KVDB_KEY = "hello";
-const KVDB_URL = `https://kvdb.io/${KVDB_BUCKET}/${KVDB_KEY}/`;
+const KVDB_BUCKET = "N7cmQg1DwZbADh2Hu3NncF";
+const KVDB_KEY = "jobs";
+const KVDB_URL = `https://kvdb.io/${KVDB_BUCKET}/`;
 
 function App() {
   const [jobs, setJobs] = useState([]);
